@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">LvsMsgr | <span id="branchName"></span></a>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <div class="btn-group dropright">
+                        <button id="postDropdown" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            [ Post ]
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="postDropdown">
+                            <div id="leafForm" class="px-4 py-3">
+                                <div>
+                                    <label for="leafPostBodyField">Message</label>
+                                    <textarea id="leafPostBodyField" name="leafPostBody"></textarea>
+                                </div>
+                                <div>
+                                    <button id="leafPostSubmit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="branchBody" class="container"></div>
+
+    <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript">
+        getToken("user1", "password1");
+    </script>
+</body>
+</html>

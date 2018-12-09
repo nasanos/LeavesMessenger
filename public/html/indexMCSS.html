@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/resources/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <nav class="blue">
+        <div class="nav-wrapper container">
+            <div class="brand-logo">LvsMsgr | <span id="branchName"></span></div>
+        </div>
+    </nav>
+
+    <div id="branchBody" class="container"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="input-field">
+                <div class="btn col s2">Post</div>
+                <textarea id="leafPostBodyField" name="leafPostBody" class="materialize-textarea col s8"></textarea>
+            </div>
+        </div>
+        <!--<div class="row justify-content-end">
+            <div class="col-4">
+                <button id="leafPostSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>-->
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h5 id="loginModalTitle">LvsMsgr Login</h5>
+            <div class="col s10 m8 input-field">
+                <input id="loginUsernameField" type="text" class="validate"/>
+                <label for="loginUsernameField">Username</label>
+            </div>
+            <div class="col s10 m8 input-field">
+                <input id="loginPasswordField" type="password" class="validate"/>
+                <label for="loginPasswordField">Password</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div id="loginSubmit" class="btn">Logon</div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/resources/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/resources/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+</body>
+</html>

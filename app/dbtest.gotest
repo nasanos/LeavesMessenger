@@ -1,0 +1,42 @@
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/mattn/go-sqlite3"
+	"log"
+)
+
+func main() {
+	db, err := sql.Open("sqlite3", "../database/main.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	rows, err := db.Query(`
+		SELECT b.name, l.body, u.username
+		FROM leaves l
+			INNER JOIN branches b
+				ON b.id=l.branch_id
+			INNER JOIN users u
+				ON u.id=l.user_id
+		WHERE b.branch='` + "1234567890ABCDEF" + `';
+	`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var name string
+		var body string
+		var username string
+		err = rows.Scan(&name, &body, &username)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(name, body, username)
+	}
+}
