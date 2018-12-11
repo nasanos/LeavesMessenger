@@ -1,9 +1,14 @@
+// ----------
+// To do:
+//  - Abstract the logic to select a user ID from a token into its own function.
+
 package main
 
 import (
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
+    "strconv"
 )
 
 func selectAuthentication(token string) string {
@@ -248,6 +253,54 @@ func selectBranch(token string, branchKey string) (*Branch) {
     fmt.Println("Queried branch: " + branchKey + ".")
 
     return &branch
+}
+
+func updateLastBranch(token string, branchKey string) {
+    var userId int
+
+    db, err := sql.Open("sqlite3", "../database/main.db")
+	if err != nil {
+        fmt.Println(ErrorDBConnection)
+		return
+	}
+	defer db.Close()
+
+	stmt, err := db.Prepare(`
+		SELECT id
+		FROM users
+		WHERE user_token = ?
+		;
+	`)
+	if err != nil {
+		fmt.Println(ErrorDBOther)
+        return
+	}
+
+    row := stmt.QueryRow(token)
+    err = row.Scan(&userId)
+    if err != nil {
+		fmt.Println(ErrorDBQuery)
+        return
+    }
+
+    stmt, err = db.Prepare(`
+		UPDATE users
+        SET last_branch_id = ?
+        WHERE id = ?
+		;
+	`)
+	if err != nil {
+		fmt.Println(ErrorDBOther)
+        return
+	}
+
+	_, err = stmt.Exec(branchKey, userId)
+	if err != nil {
+		fmt.Println(ErrorDBUpdate)
+        return
+	}
+
+    fmt.Println("Updated last visited branch for " + strconv.Itoa(userId) + " to " + branchKey + ".")
 }
 
 func insertLeaf(token string, leaf Leaf) *Leaf {

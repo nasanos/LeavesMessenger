@@ -103,6 +103,8 @@ func handleBranch(writer http.ResponseWriter, request *http.Request) {
 	}
 
     fmt.Fprintf(writer, string(branchJSON))
+
+    updateLastBranch(token, branchKey)
 }
 
 func handlePostLeaf(writer http.ResponseWriter, request *http.Request) {
