@@ -131,10 +131,22 @@ websocketConnection = (branchKey, token) => {
         leaf = JSON.parse(response.data)
         appendLeaf(leaf);
     }
-}    
+}
 
 $("#loginSubmit").click(() => {
     getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+});
+
+$("#loginUsernameField").on("keypress", (e) => {
+    if (e.keyCode == 13) {
+        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+    }
+});
+
+$("#loginPasswordField").on("keypress", (e) => {
+    if (e.keyCode == 13) {
+        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+    }
 });
 
 $("#leafPostSubmit").click(() => {
