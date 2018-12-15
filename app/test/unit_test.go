@@ -3,6 +3,7 @@ package main
 import (
     "net/http"
     "net/http/httptest"
+    "strings"
     "testing"
 )
 
@@ -16,7 +17,7 @@ func TestSelectUserHandler(t *testing.T) {
         t.Fatal(err)
     }
 
-    request.Header.Add("Authentication", "138CB39F47E8342D88293B86CA37F9E8")
+    request.Header.Add("Authentication", "6DA8F3AE1CE67DDEF5B55D062C246981")
 
     recorder := httptest.NewRecorder()
     handler := http.HandlerFunc(handleUser)
@@ -27,11 +28,41 @@ func TestSelectUserHandler(t *testing.T) {
         return
     }
 
-    expectedBody := "{\"LastBranchKey\":\"1234567890ABCDEF\",\"SubscribedBranchKeys\":[\"\"],\"SubscribedBranchNames\":[\"\"], \"Error\": {\"Description\":\"\"}"
+    expectedSubbody := "1234567890ABCDEF"
     responseBody := recorder.Body.String()
 
-    if responseBody != expectedBody {
-        t.Errorf("%v provided an unexpected value:\n    %v\n  instead of\n    %v.", testName, responseBody, expectedBody)
+    if !strings.Contains(responseBody, expectedSubbody) {
+        t.Errorf("%v provided an unexpected value: %v, without %v.", testName, responseBody, expectedSubbody)
+        return
+    }
+
+    return
+}
+
+func TestSelectBranchHandler(t *testing.T) {
+    testName := "handleBranch"
+
+    request, err := http.NewRequest("GET", "localhost:8080/b/1234567890ABCDEF", nil)
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    request.Header.Add("Authentication", "6DA8F3AE1CE67DDEF5B55D062C246981")
+
+    recorder := httptest.NewRecorder()
+    handler := http.HandlerFunc(handleBranch)
+    handler.ServeHTTP(recorder, request)
+
+    if status := recorder.Code; status != http.StatusOK {
+        t.Errorf("%v returned status of %v.", testName, status)
+        return
+    }
+
+    expectedSubbody := "2018-12-09 14:21"
+    responseBody := recorder.Body.String()
+
+    if !strings.Contains(responseBody, expectedSubbody1) {
+        t.Errorf("%v provided an unexpected value: %v, without %v.", testName, responseBody, expectedSubbody)
         return
     }
 

@@ -12,6 +12,7 @@ import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
     "github.com/gorilla/websocket"
+    "path"
 	"net/http"
     "time"
 )
@@ -62,16 +63,18 @@ func handleUser(writer http.ResponseWriter, request *http.Request) {
 
 func handleBranch(writer http.ResponseWriter, request *http.Request) {
 	token := request.Header.Get("Authentication")
-	branchKey := request.URL.Path[len("/b/"):]
+    requestUrl := request.URL.String()
+	branchKey := path.Base(requestUrl)
 
-    authentication := checkAuthentication(token, "")
+    if len(token) != 32 || len(branchKey) != 16 {
+        fmt.Fprintf(writer, ErrorHeaderToken)
+        return
+    }
+
+    authentication := checkAuthentication(token, branchKey)
 
     if authentication != "" {
         fmt.Fprintf(writer, authentication)
-        return
-    }
-    if token == "" || len(token) != 32 || branchKey == "" {
-        fmt.Fprintf(writer, ErrorHeaderToken)
         return
     }
 

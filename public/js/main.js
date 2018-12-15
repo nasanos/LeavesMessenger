@@ -76,18 +76,6 @@ getBranch = (token, branchKey) => {
                 $("#branchBody").html("");
                 for (i=0; i<branch.Leaves.length; i++) {
                     appendLeaf(branch.Leaves[i]);
-
-                    //$("#branchBody").append(`
-                    //<div class="row justify-content-center">
-                    //    <div id="leafBody-` + i + `" class="col-10 col-md-8">` + branch.Leaves[i].Body + `</div>
-                    //</div>
-                    //<div class="row justify-content-end">
-                    //    <div id="leafHeader-` + i + `" class="col-10 col-md-6 col-lg-5f">
-                    //        <p class="leafHeader">` + branch.Leaves[i].Username + ` | ` + branch.Leaves[i].Datetime + `</p>
-                    //    </div>
-                    //</div>
-                    //<hr class="leafDivider"/>
-                    //`);
                 }
 
                 websocketConnection(branchKey, token);
@@ -102,9 +90,11 @@ getBranch = (token, branchKey) => {
 }
 
 appendLeaf = (leaf) => {
+    leafBody = leaf.Body.replace(/(?:\r\n|\r|\n)/g, "<br/>");
+
     $("#branchBody").append(`
         <div class="row justify-content-center">
-            <div id="leafBody-` + leafBodyCount + `" class="col-10 col-md-8">` + leaf.Body + `</div>
+            <div id="leafBody-` + leafBodyCount + `" class="col-10 col-md-8">` + leafBody + `</div>
         </div>
         <div class="row justify-content-end">
             <div id="leafHeader-` + leafBodyCount + `" class="col-10 col-md-6 col-lg-5f">
