@@ -26,9 +26,6 @@ func handleLogon(writer http.ResponseWriter, request *http.Request) {
 
 	token := updateLogonToken(username, password)
 
-//    cookie := http.Cookie{Name: "Authentication", Value: token.Token, Expires: time.Now().Local().Add(time.Hour * 24)}
-//    http.SetCookie(writer, &cookie)
-
 	tokenJSON, err := json.Marshal(token)
 	if err != nil {
 		fmt.Fprintf(writer, ErrorJSON)
@@ -40,14 +37,6 @@ func handleLogon(writer http.ResponseWriter, request *http.Request) {
 
 func handleUser(writer http.ResponseWriter, request *http.Request) {
 	token := request.Header.Get("Authentication")
-
-//    cookie, err := request.Cookie("Authentication")
-//    if err != nil {
-//		fmt.Fprintf(writer, ErrorHeaderToken)
-//        return
-//	}
-//
-//    token := cookie.Value
 
     authentication := checkAuthentication(token, "")
 
@@ -74,14 +63,6 @@ func handleUser(writer http.ResponseWriter, request *http.Request) {
 func handleBranch(writer http.ResponseWriter, request *http.Request) {
 	token := request.Header.Get("Authentication")
 	branchKey := request.URL.Path[len("/b/"):]
-
-//    cookie, err := request.Cookie("Authentication")
-//    if err != nil {
-//		fmt.Fprintf(writer, ErrorHeaderToken)
-//        return
-//	}
-//
-//    token := cookie.Value
 
     authentication := checkAuthentication(token, "")
 
@@ -111,14 +92,6 @@ func handlePostLeaf(writer http.ResponseWriter, request *http.Request) {
     token := request.Header.Get("Authentication")
     branchKey := request.FormValue("branchKey")
     leafBody := request.FormValue("body")
-
-//    cookie, err := request.Cookie("Authentication")
-//    if err != nil {
-//		fmt.Fprintf(writer, ErrorHeaderToken)
-//        return
-//	}
-//
-//    token := cookie.Value
 
     authentication := checkAuthentication(token, branchKey)
 
@@ -176,7 +149,7 @@ func handleWebsocket(writer http.ResponseWriter, request *http.Request) {
     clients[connection] = branchKey[0]
 
     fmt.Println("Websocket connection made: " + branchKey[0])
-    
+
     fmt.Fprintf(writer, SuccessWebsocket)
 }
 

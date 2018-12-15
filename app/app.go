@@ -10,9 +10,9 @@ func main() {
 	http.HandleFunc("/u/", handleUser)
 	http.HandleFunc("/b/", handleBranch)
 	http.HandleFunc("/l/", handlePostLeaf)
-    http.HandleFunc("/ws/", handleWebsocket)
+	http.HandleFunc("/ws/", handleWebsocket)
 
-    http.Handle("/", http.FileServer(http.Dir("../public")))
+	http.Handle("/", http.FileServer(http.Dir("../public")))
 
 	http.ListenAndServe(":8080", nil)
 }
