@@ -1,3 +1,24 @@
+.oi-menu {
+    margin-right: 2em;
+    color: white;
+}
+
+.navbar-nav {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.navbar-nav > li.nav-header > a {
+    cursor: default;
+    margin-left: -2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    margin-left: 2em;
+}
+
 .leafHeader {
     margin: 0;
     margin-top: 1em;
@@ -10,10 +31,14 @@
     width: 50%;
 }
 
-#branchBody {
-    margin-top: 1em;
+.navHeader {
+    padding: 1em;
 }
 
-#branchName {
+.subHeading {
     color: #ffffff
+}
+
+#branchBody {
+    margin-top: 1em;
 }

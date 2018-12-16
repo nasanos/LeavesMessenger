@@ -124,18 +124,18 @@ websocketConnection = (branchKey, token) => {
 }
 
 $("#loginSubmit").click(() => {
-    getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+    getToken($("#loginUsernameField").val(), $("#loginPasswordField").val());
 });
 
 $("#loginUsernameField").on("keypress", (e) => {
     if (e.keyCode == 13) {
-        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val());
     }
 });
 
 $("#loginPasswordField").on("keypress", (e) => {
     if (e.keyCode == 13) {
-        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val())
+        getToken($("#loginUsernameField").val(), $("#loginPasswordField").val());
     }
 });
 
@@ -172,4 +172,7 @@ $(document).ready(function() {
 
     $(".modal").on("shown.bs.modal", () => {checkToken();});
     $(".modal").on("hidden.bs.modal", () => {checkToken();});
+
+    // For testing:
+    getToken("BabyBird", "gumbo");
 });
