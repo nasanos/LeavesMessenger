@@ -206,7 +206,4 @@ $(document).ready(function() {
 
     $(".modal").on("shown.bs.modal", () => {checkToken();});
     $(".modal").on("hidden.bs.modal", () => {checkToken();});
-
-    // For testing:
-    getToken("BabyBird", "gumbo");
 });
