@@ -43,6 +43,11 @@ getUser = (token) => {
                 currentToken = "";
                 checkToken();
             } else {
+                $("#branchLinks").html("");
+                for (i=0; i<user.SubscribedBranchKeys.length; i++) {
+                    appendBranchLink(user.SubscribedBranchKeys[i], user.SubscribedBranchNames[i]);
+                }
+
                 getBranch(token, user.LastBranchKey);
             }
         },
@@ -74,8 +79,13 @@ getBranch = (token, branchKey) => {
                 $("#branchName").text(branch.Name);
 
                 $("#branchBody").html("");
-                for (i=0; i<branch.Leaves.length; i++) {
-                    appendLeaf(branch.Leaves[i]);
+
+                if (branch.Leaves.length <= 0) {
+                    appendLeaf("");
+                } else {
+                    for (i=0; i<branch.Leaves.length; i++) {
+                        appendLeaf(branch.Leaves[i]);
+                    }
                 }
 
                 websocketConnection(branchKey, token);
@@ -89,20 +99,44 @@ getBranch = (token, branchKey) => {
     });
 }
 
-appendLeaf = (leaf) => {
-    leafBody = leaf.Body.replace(/(?:\r\n|\r|\n)/g, "<br/>");
-
-    $("#branchBody").append(`
-        <div class="row justify-content-center">
-            <div id="leafBody-` + leafBodyCount + `" class="col-10 col-md-8">` + leafBody + `</div>
-        </div>
-        <div class="row justify-content-end">
-            <div id="leafHeader-` + leafBodyCount + `" class="col-10 col-md-6 col-lg-5f">
-                <p class="leafHeader">` + leaf.Username + ` | ` + leaf.Datetime + `</p>
-            </div>
-        </div>
-        <hr class="leafDivider"/>
+appendBranchLink = (branchKey, branchName) => {
+    $("#branchLinks").append(`
+        <li class="nav-item">
+            <a href="#" onclick="changeBranch('` + branchKey + `');" class="nav-link nav-selectable active">` + branchName + `</a>
+        </li>
     `);
+}
+
+changeBranch = (branchKey) => {
+    getBranch(currentToken, branchKey);
+}
+
+appendLeaf = (leaf) => {
+    if (leaf == "") {
+        $("#branchBody").append(`
+            <div class="row justify-content-center">
+                <div class="col-10 col-md-8" style="text-align: center">
+                    <span class="systemLeaf">Hey, it's quite here. Why don't you be the first to post!</span>
+                    <p class="leafHeader"></p>
+                    <hr class="leafDivider"/>
+                </div>
+            </div>
+        `);
+    } else {
+        leafBody = leaf.Body.replace(/(?:\r\n|\r|\n)/g, "<br/>");
+
+        $("#branchBody").append(`
+            <div class="row justify-content-center">
+                <div id="leafBody-` + leafBodyCount + `" class="col-10 col-md-8">` + leafBody + `</div>
+            </div>
+            <div class="row justify-content-end">
+                <div id="leafHeader-` + leafBodyCount + `" class="col-10 col-md-6 col-lg-5f">
+                    <p class="leafHeader">` + leaf.Username + ` | ` + leaf.Datetime + `</p>
+                </div>
+            </div>
+            <hr class="leafDivider"/>
+        `);
+    }
 }
 
 checkToken = () => {

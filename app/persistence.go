@@ -172,6 +172,7 @@ func selectUser(token string) *User {
 			INNER JOIN users u
 				ON u.id=ub.user_id
 		WHERE u.user_token=?
+        ORDER BY b.name ASC
 		;
 	`)
 	if err != nil {

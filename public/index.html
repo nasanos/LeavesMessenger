@@ -23,19 +23,18 @@
                 <a data-toggle="collapse" href="#branchMenu"><span class="oi oi-menu"></span></a>
                 <span class="navbar-brand">LvsMsgr |</span><span class="subHeading">Menu</span>
             </div>
-            <ul class="navbar-nav flex-column">
-                <li class="nav-header nav-item">
+            <ul class="navbar-nav flex-column col-10 col-md-4">
+                <li class="nav-item nav-header-link">
+                    <a href="#" class="nav-link nav-selectable">Logout <span class="oi oi-account-logout"></span></a>
+                </li>
+                <li class="nav-item nav-header">
                     <a href="#" class="nav-link">Branches</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">Test</a>
-                </li>
-                <li class="nav-header nav-item">
-                    <a href="#" class="nav-link">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Logout <span class="oi oi-account-logout"></span></a>
-                </li>
+                <div id="branchLinks">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-selectable active">Test</a>
+                    </li>
+                </div>
             </ul>
         </nav>
     </div>
@@ -43,14 +42,14 @@
     <div id="branchBody" class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-md-8" style="text-align: center">
-                No messages here yet.
+                <span class="systemLeaf">No messages here yet.</span>
                 <p class="leafHeader"></p>
                 <hr class="leafDivider"/>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div id="leafSubmitBody" class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-md-8">
                 <div class="input-group mb-3">

@@ -1,7 +1,6 @@
 // ----------
 // Next steps:
 //  - Implement websocket disconnects;
-//  - Fix Logon button to accept enter key;
 //  - Implement branch change on frontend --
 //    - Ensure this functions with the websocket disconnect.
 

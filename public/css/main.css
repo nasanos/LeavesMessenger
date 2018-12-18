@@ -1,3 +1,8 @@
+.systemLeaf {
+    letter-spacing: 0.2em;
+    color: #666666;
+}
+
 .oi-menu {
     margin-right: 2em;
     color: white;
@@ -15,8 +20,17 @@
     text-transform: uppercase;
 }
 
+.navbar-nav > li.nav-header-link > a {
+    margin-left: -2em;
+    font-weight: bold;
+}
+
 .nav-item {
     margin-left: 2em;
+}
+
+.nav-selectable:hover {
+    border-bottom: 1px solid #666666;
 }
 
 .leafHeader {
@@ -39,6 +53,15 @@
     color: #ffffff
 }
 
+#branchMenu {
+    padding-bottom: 2em;
+}
+
 #branchBody {
-    margin-top: 1em;
+    margin-top: 8em;
+    margin-bottom: 3em;
+}
+
+#leafSubmitBody {
+    margin-bottom: 8em;
 }
